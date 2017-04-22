@@ -1,0 +1,9 @@
+C:\Users\mpyz\Documents\Visual Studio 2010\Projects\Bibliotheque\BibliothequeV2\bin\Debug\BibliothequeV2.dll
+C:\Users\mpyz\Documents\Visual Studio 2010\Projects\Bibliotheque\BibliothequeV2\bin\Debug\BibliothequeV2.pdb
+C:\Users\mpyz\Documents\Visual Studio 2010\Projects\Bibliotheque\BibliothequeV2\obj\Debug\BibliothequeV2.dll
+C:\Users\mpyz\Documents\Visual Studio 2010\Projects\Bibliotheque\BibliothequeV2\obj\Debug\BibliothequeV2.pdb
+C:\Users\maxime\Documents\Visual Studio 2017\Projects\projetWin\2010\Projects\Bibliotheque\BibliothequeV2\bin\Debug\BibliothequeV2.dll
+C:\Users\maxime\Documents\Visual Studio 2017\Projects\projetWin\2010\Projects\Bibliotheque\BibliothequeV2\bin\Debug\BibliothequeV2.pdb
+C:\Users\maxime\Documents\Visual Studio 2017\Projects\projetWin\2010\Projects\Bibliotheque\BibliothequeV2\obj\Debug\BibliothequeV2.csprojResolveAssemblyReference.cache
+C:\Users\maxime\Documents\Visual Studio 2017\Projects\projetWin\2010\Projects\Bibliotheque\BibliothequeV2\obj\Debug\BibliothequeV2.dll
+C:\Users\maxime\Documents\Visual Studio 2017\Projects\projetWin\2010\Projects\Bibliotheque\BibliothequeV2\obj\Debug\BibliothequeV2.pdb

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="Bibliotheque">
+</Property><Property Name="Fichier solution" Value="C:\Users\mpyz\Documents\Visual Studio 2010\Projects\Bibliotheque\Bibliotheque.sln">
+</Property><Property Name="Date" Value="lundi 6 mars 2017">
+</Property><Property Name="Time" Value="10:04">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="Bibliotheque.sln" Description="Fichier correctement sauvegardé en tant que C:\Users\mpyz\Documents\Visual Studio 2010\Projects\Bibliotheque\Backup\Bibliotheque.sln">
+</Event><Event ErrorLevel="0" Project="Bibliotheque" Source="Bibliotheque\Bibliotheque.csproj" Description="Fichier projet correctement sauvegardé en tant que C:\Users\mpyz\Documents\Visual Studio 2010\Projects\Bibliotheque\Backup\Bibliotheque\Bibliotheque.csproj">
+</Event><Event ErrorLevel="0" Project="Bibliotheque" Source="Bibliotheque\Bibliotheque.csproj.user" Description="Fichier utilisateur de projet correctement sauvegardé en tant que C:\Users\mpyz\Documents\Visual Studio 2010\Projects\Bibliotheque\Backup\Bibliotheque\Bibliotheque.csproj.user">
+</Event><Event ErrorLevel="0" Project="Bibliotheque" Source="Bibliotheque\Program.cs" Description="Fichier correctement sauvegardé en tant que C:\Users\mpyz\Documents\Visual Studio 2010\Projects\Bibliotheque\Backup\Bibliotheque\Program.cs">
+</Event><Event ErrorLevel="0" Project="Bibliotheque" Source="Bibliotheque\Properties\AssemblyInfo.cs" Description="Fichier correctement sauvegardé en tant que C:\Users\mpyz\Documents\Visual Studio 2010\Projects\Bibliotheque\Backup\Bibliotheque\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="Bibliotheque" Source="Bibliotheque\App.config" Description="Fichier correctement sauvegardé en tant que C:\Users\mpyz\Documents\Visual Studio 2010\Projects\Bibliotheque\Backup\Bibliotheque\App.config">
+</Event><Event ErrorLevel="0" Project="Bibliotheque" Source="Bibliotheque\Bibliotheque.csproj" Description="Le fichier projet ne doit pas être converti.">
+</Event><Event ErrorLevel="3" Project="Bibliotheque" Source="Bibliotheque\Bibliotheque.csproj" Description="Aucune conversion requise">
+</Event><Event ErrorLevel="0" Project="Server" Source="Server\Server.csproj" Description="Fichier projet correctement sauvegardé en tant que C:\Users\mpyz\Documents\Visual Studio 2010\Projects\Bibliotheque\Backup\Server\Server.csproj">
+</Event><Event ErrorLevel="0" Project="Server" Source="Server\Server.cs" Description="Fichier correctement sauvegardé en tant que C:\Users\mpyz\Documents\Visual Studio 2010\Projects\Bibliotheque\Backup\Server\Server.cs">
+</Event><Event ErrorLevel="0" Project="Server" Source="Server\Properties\AssemblyInfo.cs" Description="Fichier correctement sauvegardé en tant que C:\Users\mpyz\Documents\Visual Studio 2010\Projects\Bibliotheque\Backup\Server\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="Server" Source="Server\App.config" Description="Fichier correctement sauvegardé en tant que C:\Users\mpyz\Documents\Visual Studio 2010\Projects\Bibliotheque\Backup\Server\App.config">
+</Event><Event ErrorLevel="0" Project="Server" Source="Server\Server.csproj" Description="Le fichier projet ne doit pas être converti.">
+</Event><Event ErrorLevel="3" Project="Server" Source="Server\Server.csproj" Description="Aucune conversion requise">
+</Event><Event ErrorLevel="0" Project="Client" Source="Client\Client.csproj" Description="Fichier projet correctement sauvegardé en tant que C:\Users\mpyz\Documents\Visual Studio 2010\Projects\Bibliotheque\Backup\Client\Client.csproj">
+</Event><Event ErrorLevel="0" Project="Client" Source="Client\Client.cs" Description="Fichier correctement sauvegardé en tant que C:\Users\mpyz\Documents\Visual Studio 2010\Projects\Bibliotheque\Backup\Client\Client.cs">
+</Event><Event ErrorLevel="0" Project="Client" Source="Client\Properties\AssemblyInfo.cs" Description="Fichier correctement sauvegardé en tant que C:\Users\mpyz\Documents\Visual Studio 2010\Projects\Bibliotheque\Backup\Client\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="Client" Source="Client\App.config" Description="Fichier correctement sauvegardé en tant que C:\Users\mpyz\Documents\Visual Studio 2010\Projects\Bibliotheque\Backup\Client\App.config">
+</Event><Event ErrorLevel="0" Project="Client" Source="Client\Client.csproj" Description="Le fichier projet ne doit pas être converti.">
+</Event><Event ErrorLevel="3" Project="Client" Source="Client\Client.csproj" Description="Aucune conversion requise">
+</Event><Event ErrorLevel="0" Project="" Source="Bibliotheque.sln" Description="Solution correctement convertie">
+</Event><Event ErrorLevel="3" Project="" Source="Bibliotheque.sln" Description="Converted">
+</Event></UpgradeLog>
