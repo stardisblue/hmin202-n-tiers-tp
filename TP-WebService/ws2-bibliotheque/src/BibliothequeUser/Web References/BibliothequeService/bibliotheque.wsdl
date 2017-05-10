@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://stardis.blue/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://stardis.blue/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://stardis.blue/">
+      <s:element name="getBooks">
+        <s:complexType />
+      </s:element>
+      <s:element name="getBooksResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getBooksResult" type="tns:Books" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Books">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Book" type="tns:Book" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Book">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ISBN" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Author" type="tns:Author" />
+          <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Genre" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DatePublication" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Author">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="FirstName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LastName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DateOfBirth" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="getBook">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ISBN" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getBookResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getBookResult" type="tns:Book" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="findBooks">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="findBooksResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="findBooksResult" type="tns:Books" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="findBooksByAuthor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FirstName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LastName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="findBooksByAuthorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="findBooksByAuthorResult" type="tns:Books" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="getBooksSoapIn">
+    <wsdl:part name="parameters" element="tns:getBooks" />
+  </wsdl:message>
+  <wsdl:message name="getBooksSoapOut">
+    <wsdl:part name="parameters" element="tns:getBooksResponse" />
+  </wsdl:message>
+  <wsdl:message name="getBookSoapIn">
+    <wsdl:part name="parameters" element="tns:getBook" />
+  </wsdl:message>
+  <wsdl:message name="getBookSoapOut">
+    <wsdl:part name="parameters" element="tns:getBookResponse" />
+  </wsdl:message>
+  <wsdl:message name="findBooksSoapIn">
+    <wsdl:part name="parameters" element="tns:findBooks" />
+  </wsdl:message>
+  <wsdl:message name="findBooksSoapOut">
+    <wsdl:part name="parameters" element="tns:findBooksResponse" />
+  </wsdl:message>
+  <wsdl:message name="findBooksByAuthorSoapIn">
+    <wsdl:part name="parameters" element="tns:findBooksByAuthor" />
+  </wsdl:message>
+  <wsdl:message name="findBooksByAuthorSoapOut">
+    <wsdl:part name="parameters" element="tns:findBooksByAuthorResponse" />
+  </wsdl:message>
+  <wsdl:portType name="BibliothequeSoap">
+    <wsdl:operation name="getBooks">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Récupère la liste des livres de la bibliothèque</wsdl:documentation>
+      <wsdl:input message="tns:getBooksSoapIn" />
+      <wsdl:output message="tns:getBooksSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getBook">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Récupere un livre grâce à l'isbn</wsdl:documentation>
+      <wsdl:input message="tns:getBookSoapIn" />
+      <wsdl:output message="tns:getBookSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="findBooks">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Trouve tous les livres ayant ce nom</wsdl:documentation>
+      <wsdl:input message="tns:findBooksSoapIn" />
+      <wsdl:output message="tns:findBooksSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="findBooksByAuthor">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Trouve tous les livres de cet autheur</wsdl:documentation>
+      <wsdl:input message="tns:findBooksByAuthorSoapIn" />
+      <wsdl:output message="tns:findBooksByAuthorSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BibliothequeSoap" type="tns:BibliothequeSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getBooks">
+      <soap:operation soapAction="http://stardis.blue/getBooks" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getBook">
+      <soap:operation soapAction="http://stardis.blue/getBook" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findBooks">
+      <soap:operation soapAction="http://stardis.blue/findBooks" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findBooksByAuthor">
+      <soap:operation soapAction="http://stardis.blue/findBooksByAuthor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BibliothequeSoap12" type="tns:BibliothequeSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getBooks">
+      <soap12:operation soapAction="http://stardis.blue/getBooks" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getBook">
+      <soap12:operation soapAction="http://stardis.blue/getBook" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findBooks">
+      <soap12:operation soapAction="http://stardis.blue/findBooks" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findBooksByAuthor">
+      <soap12:operation soapAction="http://stardis.blue/findBooksByAuthor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Bibliotheque">
+    <wsdl:port name="BibliothequeSoap" binding="tns:BibliothequeSoap">
+      <soap:address location="http://localhost:51180/bibliotheque.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BibliothequeSoap12" binding="tns:BibliothequeSoap12">
+      <soap12:address location="http://localhost:51180/bibliotheque.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
