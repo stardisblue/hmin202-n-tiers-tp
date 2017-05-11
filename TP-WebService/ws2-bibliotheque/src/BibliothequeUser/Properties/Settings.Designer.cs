@@ -27,9 +27,9 @@ namespace BibliothequeUser.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:51180/bibliotheque.asmx")]
-        public string BibliothequeUser_BibliothequeService_Bibliotheque {
+        public string BibliothequeUser_BibliothequeService1_Bibliotheque {
             get {
-                return ((string)(this["BibliothequeUser_BibliothequeService_Bibliotheque"]));
+                return ((string)(this["BibliothequeUser_BibliothequeService1_Bibliotheque"]));
             }
         }
     }

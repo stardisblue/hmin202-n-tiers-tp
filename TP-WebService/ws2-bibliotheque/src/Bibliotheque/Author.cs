@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace models
+namespace BibliothequeClass
 {
     public class Author
     {
         public string FirstName;
-        public String LastName;
+        public string LastName;
         public DateTime DateOfBirth;
 
         public Author()

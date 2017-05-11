@@ -56,6 +56,21 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\BibliothequeService\bibliotheque.wsdl" />
+    <None Include="Web References\BibliothequeService\Book1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\BibliothequeService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
     <WebReferenceUrl Include="http://localhost:51180/bibliotheque.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\BibliothequeService\</RelPath>
@@ -65,24 +80,11 @@
       <CachedDynamicPropName>
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>BibliothequeUser_BibliothequeService_Bibliotheque</CachedSettingsPropName>
+      <CachedSettingsPropName>BibliothequeUser_BibliothequeService1_Bibliotheque</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
     <None Include="Web References\BibliothequeService\bibliotheque.disco" />
-    <None Include="Web References\BibliothequeService\bibliotheque.wsdl" />
-    <None Include="Web References\BibliothequeService\Book.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\BibliothequeService\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

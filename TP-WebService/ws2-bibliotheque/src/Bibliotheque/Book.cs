@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Xml.Serialization;
-
-namespace models
+using System.Collections.Generic;
+namespace BibliothequeClass
 {
     public class Books
     {
         [XmlElement(ElementName = "Book")]
-        public Book[] books;
+        public List<Book> books;
 
         public Books()
         {
-        
+            books = new List<Book>();
         }
         public Books(Book[] books)
         {
-            this.books = books;
+            this.books = new List<Book>(books);
         }
     }
 
@@ -23,9 +23,10 @@ namespace models
         public int ISBN;
         public Author Author;
         public string Title;
-        public String Description;
-        public String Genre;
+        public string Description;
+        public string Genre;
         public DateTime DatePublication;
+        public List<Comment> Comments;
 
         public Book(int ISBN, Author Author, string Title, string Description, string Genre, DateTime DatePublication)
         {
@@ -35,6 +36,7 @@ namespace models
             this.Description = Description;
             this.Genre = Genre;
             this.DatePublication = DatePublication;
+            this.Comments = new List<Comment>();
         }
 
         public Book()

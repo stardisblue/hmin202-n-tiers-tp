@@ -1,13 +1,15 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
-MinimumVisualStudioVersion = 10.0.40219.1
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BibliothequeUser", "BibliothequeUser\BibliothequeUser.csproj", "{DDD9A268-E1AE-4051-B65B-395F160E653D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{ECE8769A-8576-4655-A638-144740B1CB60} = {ECE8769A-8576-4655-A638-144740B1CB60}
+	EndProjectSection
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "BibliothequeWebsite", "BibliothequeWebsite\", "{ECE8769A-8576-4655-A638-144740B1CB60}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv2.0"
+		ProjectReferences = "{081E5949-858E-4890-9173-F900AE6742C3}|BibliothequeClass.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_51180"
 		Debug.AspNetCompiler.PhysicalPath = "BibliothequeWebsite\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_51180\"
@@ -23,8 +25,9 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "BibliothequeWebsite", "Bibl
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "51180"
-		SlnRelativePath = "BibliothequeWebsite\"
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BibliothequeClass", "Bibliotheque\BibliothequeClass.csproj", "{081E5949-858E-4890-9173-F900AE6742C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,6 +43,10 @@ Global
 		{ECE8769A-8576-4655-A638-144740B1CB60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ECE8769A-8576-4655-A638-144740B1CB60}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{ECE8769A-8576-4655-A638-144740B1CB60}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{081E5949-858E-4890-9173-F900AE6742C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{081E5949-858E-4890-9173-F900AE6742C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{081E5949-858E-4890-9173-F900AE6742C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{081E5949-858E-4890-9173-F900AE6742C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -2,6 +2,51 @@
 <wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://stardis.blue/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://stardis.blue/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://stardis.blue/">
+      <s:element name="connect">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="connectResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="connectResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="disconnect">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="token" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="disconnectResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="disconnectResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="addComment">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ISBN" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="content" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="token" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="addCommentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="addCommentResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="getBooks">
         <s:complexType />
       </s:element>
@@ -25,6 +70,7 @@
           <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="Genre" type="s:string" />
           <s:element minOccurs="1" maxOccurs="1" name="DatePublication" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Comments" type="tns:ArrayOfComment" />
         </s:sequence>
       </s:complexType>
       <s:complexType name="Author">
@@ -32,6 +78,17 @@
           <s:element minOccurs="0" maxOccurs="1" name="FirstName" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="LastName" type="s:string" />
           <s:element minOccurs="1" maxOccurs="1" name="DateOfBirth" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfComment">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Comment" nillable="true" type="tns:Comment" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Comment">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Content" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
         </s:sequence>
       </s:complexType>
       <s:element name="getBook">
@@ -45,6 +102,43 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="getBookResult" type="tns:Book" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="addBook">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ISBN" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="AuthorFirstName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AuthorLastName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="DateOfBirth" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Genre" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="DatePublication" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="token" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="addBookResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="addBookResult" type="tns:Book" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="deleteBook">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ISBN" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="token" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="deleteBookResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="deleteBookResult" type="tns:Book" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -79,6 +173,24 @@
       </s:element>
     </s:schema>
   </wsdl:types>
+  <wsdl:message name="connectSoapIn">
+    <wsdl:part name="parameters" element="tns:connect" />
+  </wsdl:message>
+  <wsdl:message name="connectSoapOut">
+    <wsdl:part name="parameters" element="tns:connectResponse" />
+  </wsdl:message>
+  <wsdl:message name="disconnectSoapIn">
+    <wsdl:part name="parameters" element="tns:disconnect" />
+  </wsdl:message>
+  <wsdl:message name="disconnectSoapOut">
+    <wsdl:part name="parameters" element="tns:disconnectResponse" />
+  </wsdl:message>
+  <wsdl:message name="addCommentSoapIn">
+    <wsdl:part name="parameters" element="tns:addComment" />
+  </wsdl:message>
+  <wsdl:message name="addCommentSoapOut">
+    <wsdl:part name="parameters" element="tns:addCommentResponse" />
+  </wsdl:message>
   <wsdl:message name="getBooksSoapIn">
     <wsdl:part name="parameters" element="tns:getBooks" />
   </wsdl:message>
@@ -90,6 +202,18 @@
   </wsdl:message>
   <wsdl:message name="getBookSoapOut">
     <wsdl:part name="parameters" element="tns:getBookResponse" />
+  </wsdl:message>
+  <wsdl:message name="addBookSoapIn">
+    <wsdl:part name="parameters" element="tns:addBook" />
+  </wsdl:message>
+  <wsdl:message name="addBookSoapOut">
+    <wsdl:part name="parameters" element="tns:addBookResponse" />
+  </wsdl:message>
+  <wsdl:message name="deleteBookSoapIn">
+    <wsdl:part name="parameters" element="tns:deleteBook" />
+  </wsdl:message>
+  <wsdl:message name="deleteBookSoapOut">
+    <wsdl:part name="parameters" element="tns:deleteBookResponse" />
   </wsdl:message>
   <wsdl:message name="findBooksSoapIn">
     <wsdl:part name="parameters" element="tns:findBooks" />
@@ -104,6 +228,21 @@
     <wsdl:part name="parameters" element="tns:findBooksByAuthorResponse" />
   </wsdl:message>
   <wsdl:portType name="BibliothequeSoap">
+    <wsdl:operation name="connect">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Permet de se connecter au service</wsdl:documentation>
+      <wsdl:input message="tns:connectSoapIn" />
+      <wsdl:output message="tns:connectSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="disconnect">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Permet de se deconnecter du service</wsdl:documentation>
+      <wsdl:input message="tns:disconnectSoapIn" />
+      <wsdl:output message="tns:disconnectSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="addComment">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Permet d'ajouter un commentaire</wsdl:documentation>
+      <wsdl:input message="tns:addCommentSoapIn" />
+      <wsdl:output message="tns:addCommentSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="getBooks">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Récupère la liste des livres de la bibliothèque</wsdl:documentation>
       <wsdl:input message="tns:getBooksSoapIn" />
@@ -113,6 +252,16 @@
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Récupere un livre grâce à l'isbn</wsdl:documentation>
       <wsdl:input message="tns:getBookSoapIn" />
       <wsdl:output message="tns:getBookSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="addBook">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Ajouter un livre</wsdl:documentation>
+      <wsdl:input message="tns:addBookSoapIn" />
+      <wsdl:output message="tns:addBookSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteBook">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Supprimer un livre</wsdl:documentation>
+      <wsdl:input message="tns:deleteBookSoapIn" />
+      <wsdl:output message="tns:deleteBookSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="findBooks">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Trouve tous les livres ayant ce nom</wsdl:documentation>
@@ -127,6 +276,33 @@
   </wsdl:portType>
   <wsdl:binding name="BibliothequeSoap" type="tns:BibliothequeSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="connect">
+      <soap:operation soapAction="http://stardis.blue/connect" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="disconnect">
+      <soap:operation soapAction="http://stardis.blue/disconnect" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addComment">
+      <soap:operation soapAction="http://stardis.blue/addComment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="getBooks">
       <soap:operation soapAction="http://stardis.blue/getBooks" style="document" />
       <wsdl:input>
@@ -138,6 +314,24 @@
     </wsdl:operation>
     <wsdl:operation name="getBook">
       <soap:operation soapAction="http://stardis.blue/getBook" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addBook">
+      <soap:operation soapAction="http://stardis.blue/addBook" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteBook">
+      <soap:operation soapAction="http://stardis.blue/deleteBook" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -166,6 +360,33 @@
   </wsdl:binding>
   <wsdl:binding name="BibliothequeSoap12" type="tns:BibliothequeSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="connect">
+      <soap12:operation soapAction="http://stardis.blue/connect" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="disconnect">
+      <soap12:operation soapAction="http://stardis.blue/disconnect" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addComment">
+      <soap12:operation soapAction="http://stardis.blue/addComment" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="getBooks">
       <soap12:operation soapAction="http://stardis.blue/getBooks" style="document" />
       <wsdl:input>
@@ -177,6 +398,24 @@
     </wsdl:operation>
     <wsdl:operation name="getBook">
       <soap12:operation soapAction="http://stardis.blue/getBook" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addBook">
+      <soap12:operation soapAction="http://stardis.blue/addBook" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteBook">
+      <soap12:operation soapAction="http://stardis.blue/deleteBook" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
