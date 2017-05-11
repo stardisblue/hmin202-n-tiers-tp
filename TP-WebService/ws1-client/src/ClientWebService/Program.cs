@@ -16,10 +16,15 @@ namespace ClientWebService
         static void Main(string[] args)
         {
             // Premiere partie, 
+            Debug.WriteLine("PeriodicTable :");
+            Debug.Indent();
             PeriodicTable();
+            Debug.Unindent();
 
+            Debug.WriteLine("Convert Temperature :");
+            Debug.Indent();
             ConvertTemperature();
-
+            Debug.Unindent();
         }
 
         private static void PeriodicTable()
@@ -34,18 +39,17 @@ namespace ClientWebService
             Debug.WriteLine(elementName);
 
             String element = periodicTable.GetAtomicNumber(elementName);
-            // String elementSymbol = periodicTable.GetElementSymbol(elementName);
-            // String elementAtomicWeight = periodicTable.GetAtomicWeight(elementName);
             XmlDocument atomXml = new XmlDocument();
             atomXml.LoadXml(element);
 
             XmlNode elementXml = atomXml.SelectSingleNode("NewDataSet/Table");
-
-            //Debug.WriteLine(element);
+            Debug.WriteLine(elementXml.SelectSingleNode("ElementName").InnerText);
+            Debug.Indent();
             foreach (XmlNode childNode in elementXml.ChildNodes)
             {
                 Debug.WriteLine(childNode.Name + " : " + childNode.InnerText);
             }
+            Debug.Unindent();
         }
 
         private static void ConvertTemperature()
