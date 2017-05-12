@@ -1,10 +1,7 @@
-﻿using System;
+﻿using share;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
 using System.ServiceModel;
-using System.Text;
-using share;
 
 namespace ServiceRecettes
 {
@@ -13,25 +10,58 @@ namespace ServiceRecettes
     public class ServiceRecette : IServiceRecette
     {
 
-        List<Recette> baseRecettes;
+        Dictionary<string, Recette> baseRecettes = new Dictionary<string, Recette>();
 
         //List of all reciped in the current session
         public List<Recette> selectionCour = new List<Recette>();
         //List of all ingredients in the service
-        public List<Ingredient> ingredients = new List<Ingredient>();
-
-
-        public Recette recet = new Recette();
+        public Dictionary<string, Ingredient> ingredients = new Dictionary<string, Ingredient>();
 
         public ServiceRecette()
         {
-            baseRecettes = new List<Recette>();
-            Recette recette = new Recette();
-            Ingredient ingredient = new Ingredient();
-            ingredient.Nom = "yolo";
-            recette.Listeingredients.Add(ingredient);
-            recette.Nom = "test";
-            baseRecettes.Add(recette);
+            Recette recette = createRecette("Pate carbonara");
+
+            Ingredient ingr1 = newIngredient("pates");
+            Ingredient ingr2 = newIngredient("creme fraiche");
+            Ingredient ingr3 = newIngredient("lardon");
+            Ingredient ingr4 = newIngredient("oeuf");
+            Ingredient ingr5 = newIngredient("oignon");
+
+            recette.Listeingredients.Add(ingr1);
+            recette.Listeingredients.Add(ingr2);
+            recette.Listeingredients.Add(ingr3);
+            recette.Listeingredients.Add(ingr4);
+            recette.Listeingredients.Add(ingr5);
+
+            saveRecette(recette);
+
+
+            Recette recettespagh = createRecette("Salade composé");
+
+            Ingredient ingr6 = newIngredient("salade");
+            Ingredient ingr7 = newIngredient("tomate");
+            Ingredient ingr8 = newIngredient("oeuf");
+            Ingredient ingr9 = newIngredient("oignon");
+            Ingredient ingr10 = newIngredient("mais");
+
+            recettespagh.Listeingredients.Add(ingr6);
+            recettespagh.Listeingredients.Add(ingr7);
+            recettespagh.Listeingredients.Add(ingr8);
+            recettespagh.Listeingredients.Add(ingr9);
+            recettespagh.Listeingredients.Add(ingr10);
+
+            saveRecette(recettespagh);
+
+
+            Recette recettecouscous = createRecette("tomate au sel");
+
+            Ingredient ingr11 = newIngredient("tomate");
+            Ingredient ingr12 = newIngredient("sel");
+
+            recettecouscous.Listeingredients.Add(ingr11);
+            recettecouscous.Listeingredients.Add(ingr12);
+
+            saveRecette(recettecouscous);
         }
 
 
@@ -39,7 +69,6 @@ namespace ServiceRecettes
         {
             return string.Format("You entered: {0}", value);
         }
-
 
         public CompositeType GetDataUsingDataContract(CompositeType composite)
         {
@@ -54,69 +83,126 @@ namespace ServiceRecettes
             return composite;
         }
 
-
-        public bool containsIngredient(String nameIngredient)
+        public Recette createRecette(string nom)
         {
-            foreach (Ingredient ingredient in ingredients)
+            if (baseRecettes.ContainsKey(nom))
             {
-                if (ingredient.Nom.Equals(nameIngredient))
-                {
-                    return true;
-                }
+                return baseRecettes[nom];
             }
-            return false;
-        }
 
-
-        public List<Recette> rechercheParNomIngredient(String nom)
-        {
-            List<Recette> listeRecettes = new List<Recette>();
-
-            return listeRecettes;
-
-        }
-
-        public Recette newRecette(String nom)
-        {
             Recette recette = new Recette();
             recette.Nom = nom;
             recette.Listeingredients = new List<Ingredient>();
-            baseRecettes.Add(recette);
+            baseRecettes.Add(nom, recette);
 
+            Console.WriteLine("Recette| New> " + nom);
             return recette;
         }
 
-        public Ingredient newIngredient(String nom)
+        public string addRecette(Recette recette)
         {
-            foreach (Ingredient ingredient in ingredients)
+            if (baseRecettes.ContainsKey(recette.Nom))
             {
-                if (ingredient.Nom.Equals(nom)) return ingredient;
+                Console.WriteLine("Recette| Add> !Already exist! " + recette.Nom);
+                return "Recette avec même nom existe déjà : " + recette.Nom;
             }
+
+            baseRecettes.Add(recette.Nom, recette);
+            foreach (Ingredient ingredient in recette.Listeingredients)
+            {
+                newIngredient(ingredient.Nom);
+            }
+
+            Console.WriteLine("Recette| Add> " + recette.Nom);
+            return "Ajout de la recette " + recette.Nom + " réussi";
+        }
+
+        public Recette getRecette(string Nom)
+        {
+            if (baseRecettes.ContainsKey(Nom))
+            {
+                selectionCour = new List<Recette>();
+                selectionCour.Add(baseRecettes[Nom]);
+                return baseRecettes[Nom];
+            }
+                
+
+            return null;
+        }
+
+        public string saveRecette(Recette recette)
+        {
+            if (baseRecettes.ContainsKey(recette.Nom))
+            {
+                baseRecettes[recette.Nom].Listeingredients = recette.Listeingredients;
+                Console.WriteLine("Recette| Updated> " + recette.Nom);
+                return "Recette" + recette.Nom + " mise à jour";
+            }
+
+            baseRecettes.Add(recette.Nom, recette);
+            Console.WriteLine("Recette| Created> " + recette.Nom);
+            return "Recette" + recette.Nom + " ajoutée";
+        }
+
+        public Ingredient newIngredient(string nom)
+        {
+            if (ingredients.ContainsKey(nom))
+                return ingredients[nom];
+
             Ingredient newIngredient = new Ingredient();
             newIngredient.Nom = nom;
+            ingredients.Add(nom, newIngredient);
+
+            Console.WriteLine("Ingredient| New> " + nom);
             return newIngredient;
         }
 
+        public Ingredient getIngredient(string Nom)
+        {
+            if (ingredients.ContainsKey(Nom))
+                return ingredients[Nom];
 
+            return null;
+        }
+
+        public string addIngredient(string Recette, string Ingredient)
+        {
+            if (baseRecettes.ContainsKey(Recette))
+            {
+                bool existant = false;
+                foreach (var item in baseRecettes[Recette].Listeingredients)
+                {
+                    if (item.Nom == Ingredient)
+                    {
+                        existant = true;
+                    }
+                }
+                if (!existant)
+                {
+                    baseRecettes[Recette].Listeingredients.Add(newIngredient(Ingredient));
+
+                    Console.WriteLine("Service| Add> Recette= " + Recette + ", Ingredient= " + Ingredient);
+                    return "Ingredient " + Ingredient + "ajouté à la recette" + Recette;
+                }
+                return "L'ingredient" + Ingredient + " est déjà present dans la recette" + Recette;
+            }
+            return "La recette " + Recette + " n'existe pas";
+        }
 
         public List<Recette> searchRecette(Ingredient ingr)
         {
             List<Recette> liste = new List<Recette>();
 
 
-            foreach (Recette rec in baseRecettes)
+            foreach (Recette rec in baseRecettes.Values)
             {
                 foreach (Ingredient ingred in rec.Listeingredients)
                 {
-
-                    if (ingred.Nom.Equals(ingr.Nom))
+                    if (ingred.Nom.Equals(ingr.Nom) && !liste.Contains(rec))
                     {
-                        if (!liste.Contains(rec))
-                        {
-                            Console.WriteLine("La recette " + rec.Nom + " fait partie des recettes contenant l'ingrédient " + ingr.Nom);
-                            liste.Add(rec);
-                            selectionCour.Add(rec);
-                        }
+                        Console.WriteLine("La recette " + rec.Nom + " fait partie des recettes contenant l'ingrédient " + ingr.Nom);
+                        liste.Add(rec);
+                        selectionCour.Add(rec);
                     }
                 }
             }
@@ -124,31 +210,16 @@ namespace ServiceRecettes
             return liste;
         }
 
-
-        public String getNomIngre(Ingredient ing)
+        public bool isEmpty()
         {
-            return ing.Nom;
+            if (this.baseRecettes.Count != 0)
+                return false;
+
+
+            return true;
         }
 
-
-        public String getNomRecette(Recette rec)
-        {
-            return rec.Nom;
-        }
-
-        public Boolean isEmpty()
-        {
-            Boolean empty = true;
-            if (this.baseRecettes.Count() != 0)
-            {
-                empty = false;
-            }
-
-            return empty;
-        }
-
-
-        public string deletecourante(String nom)
+        public string deletecourante(string nom)
         {
             foreach (Recette rec in selectionCour)
             {
@@ -168,44 +239,10 @@ namespace ServiceRecettes
             return selectionCour;
         }
 
-
-        public string addRecette(Recette recettes)
-        {
-            this.recet = recettes;
-            Boolean test = false;
-
-            foreach (Recette rec in baseRecettes)
-            {
-                if (rec.Nom.Equals(recettes.Nom))
-                {
-                    test = true;
-                }
-            }
-
-            if (test == false)
-            {
-                baseRecettes.Add(recet);
-                Console.WriteLine("Ajout de la recette " + recet.Nom + " réussi");
-                return "Ajout de la recette " + recet.Nom + " réussi";
-
-            }
-            else
-            {
-                Console.WriteLine("Recette avec même nom existe déjà : " + recet.Nom);
-                return "Recette avec même nom existe déjà : " + recet.Nom;
-            }
-        }
-
-
-        public void initializebase()
-        {
-            baseRecettes = new List<Recette>();
-        }
-
-
-        public List<Recette> listeBase()
+        public Dictionary<string, Recette> listeBase()
         {
             return baseRecettes;
         }
+
     }
 }

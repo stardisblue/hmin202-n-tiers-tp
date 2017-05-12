@@ -9,10 +9,10 @@ namespace share
     [DataContract]
     public class Ingredient
     {
-        String nom;
+        string nom;
 
         [DataMember]
-        public String Nom
+        public string Nom
         {
             get { return nom; }
             set { nom = value; }

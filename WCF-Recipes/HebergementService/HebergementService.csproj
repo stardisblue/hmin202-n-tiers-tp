@@ -50,10 +50,6 @@
       <Project>{03A09584-60FF-4812-A132-E9AA37FABF75}</Project>
       <Name>ServiceRecettes</Name>
     </ProjectReference>
-    <ProjectReference Include="..\share\share.csproj">
-      <Project>{1FE09E71-8285-4CA0-8576-BF81FA0FC2D5}</Project>
-      <Name>share</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

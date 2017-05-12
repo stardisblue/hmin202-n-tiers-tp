@@ -12,6 +12,7 @@
     <AssemblyName>ServiceRecettes</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -45,7 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\share\share.csproj">
-      <Project>{1FE09E71-8285-4CA0-8576-BF81FA0FC2D5}</Project>
+      <Project>{1fe09e71-8285-4ca0-8576-bf81fa0fc2d5}</Project>
       <Name>share</Name>
     </ProjectReference>
   </ItemGroup>

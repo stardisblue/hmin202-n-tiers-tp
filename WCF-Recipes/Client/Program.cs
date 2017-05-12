@@ -1,62 +1,17 @@
-﻿using System;
+﻿using share;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using share;
 using System.ServiceModel;
 
 namespace Client
 {
-    
+
     public static class Program
     {
         private static IServiceRecette recetteProxy;
 
         private static void initialisationRecettes()
         {
-            /*Recette recette = recetteProxy.newRecette("Pate carbonara");
-
-           Ingredient ingr1 = recetteProxy.newIngredient("pates");
-           Ingredient ingr2 = recetteProxy.newIngredient("creme fraiche");
-           Ingredient ingr3 = recetteProxy.newIngredient("lardon");
-           Ingredient ingr4 = recetteProxy.newIngredient("oeuf");
-           Ingredient ingr5 = recetteProxy.newIngredient("oignon");
-
-           recette.Listeingredients.Add(ingr1);
-           recette.Listeingredients.Add(ingr2);
-           recette.Listeingredients.Add(ingr3);
-           recette.Listeingredients.Add(ingr4);
-           recette.Listeingredients.Add(ingr5);
-
-           recetteProxy.addRecette(recette);
-
-
-           Recette recettespagh = recetteProxy.newRecette("Salade composé");
-
-           Ingredient ingr6 = recetteProxy.newIngredient("salade");
-           Ingredient ingr7 = recetteProxy.newIngredient("tomate");
-           Ingredient ingr8 = recetteProxy.newIngredient("oeuf");
-           Ingredient ingr9 = recetteProxy.newIngredient("oignon");
-           Ingredient ingr10 = recetteProxy.newIngredient("mais");
-
-           recettespagh.Listeingredients.Add(ingr6);
-           recettespagh.Listeingredients.Add(ingr7);
-           recettespagh.Listeingredients.Add(ingr8);
-           recettespagh.Listeingredients.Add(ingr9);
-           recettespagh.Listeingredients.Add(ingr10);
-
-           recetteProxy.addRecette(recettespagh);
-
-
-           Recette recettecouscous = recetteProxy.newRecette("tomate au sel");
-
-           Ingredient ingr11 = recetteProxy.newIngredient("tomate");
-           Ingredient ingr12 = recetteProxy.newIngredient("sel");
-
-           recettecouscous.Listeingredients.Add(ingr11);
-           recettecouscous.Listeingredients.Add(ingr12);
-
-           recetteProxy.addRecette(recettecouscous);*/
         }
 
 
@@ -64,7 +19,7 @@ namespace Client
         private static void listRecettes()
         {
             Console.WriteLine("Liste des recettes déjà disponible (sélection courante) : ");
-            foreach (Recette rec in recetteProxy.listeBase())
+            foreach (Recette rec in recetteProxy.listeBase().Values)
             {
                 Console.WriteLine(rec.Nom);
             }
@@ -79,47 +34,26 @@ namespace Client
             Console.WriteLine("\nQuel est le nom de la recette que vous souhaitez créer?");
             String nomRecette = Console.ReadLine();
             // récupérer la recette
-            Recette recette1 = recetteProxy.newRecette(nomRecette);
-
+            Recette recette = recetteProxy.createRecette(nomRecette);
             Console.WriteLine("\nDonnez l'ensemble des ingredients separées par des espaces");
 
             String listeIngredients = Console.ReadLine();
             String[] ingredients = listeIngredients.Split(' ');
 
+            Console.WriteLine("\n"+recette.Nom+" : ");
+
             if (ingredients.Length > 0)
             {
-                foreach (String ingredientName in ingredients)
+                foreach (string ingredientName in ingredients)
                 {
-                    if (recetteProxy.containsIngredient(ingredientName))
-                    {
-                        
-                    }
+                    Ingredient ingred = recetteProxy.newIngredient(ingredientName);
+                    recette.Listeingredients.Add(ingred);
+                    Console.WriteLine("\t" + ingred.Nom);
                 }
             }
 
-            /*Console.WriteLine("\nCombien d'ingrédient sont nécessaire à la création de votre recette?");
-            int nbingredients = Convert.ToInt32(Console.ReadLine());
-
-            for (int i = 0; i < nbingredients; i++)
-            {
-                int ii = i + 1;
-                Console.WriteLine("\nNom de l'ingrédient n°" + ii);
-                String nomIngr = Console.ReadLine();
-                // Nouveau ingrédient
-                Ingredient ingr = recetteProxy.newIngredient(nomIngr);
-                // Ajout de l'ingrédient à la recette
-                recette1.Listeingredients.Add(ingr);
-            }*/
-
-            List<Ingredient> listingrr = recette1.Listeingredients;
-            Console.WriteLine("\nLa recettes " + recette1.Nom + " contient les ingrédients : ");
-            foreach (Ingredient inr in listingrr)
-            {
-                Console.WriteLine(inr.Nom);
-            }
-
             //Ajout de la recette à la base
-            Console.WriteLine(recetteProxy.addRecette(recette1));
+            Console.WriteLine(recetteProxy.saveRecette(recette));
         }
 
 
@@ -134,7 +68,7 @@ namespace Client
 
             Boolean test = false;
             // Voir si ingrédient existe dans une des recettes
-            foreach (Recette rec in recetteProxy.listeBase())
+            foreach (Recette rec in recetteProxy.listeBase().Values)
             {
                 foreach (Ingredient ingr in rec.Listeingredients)
                 {
@@ -166,7 +100,7 @@ namespace Client
             foreach (Recette rec in listerecette)
             {
                 // Afficher toutes les recettes retrouvées
-                Console.WriteLine(rec.Nom);
+                Console.WriteLine("\t" + rec.Nom);
             }
 
             selectionCourante();
@@ -179,12 +113,12 @@ namespace Client
             Console.WriteLine("Liste des recettes dans la selection courante :");
             foreach (Recette rec in recetteProxy.getInfoCourante())
             {
-                Console.WriteLine(rec.Nom);
+                Console.WriteLine("\t" + rec.Nom);
             }
 
             if (recetteProxy.getInfoCourante().Count == 0)
             {
-                Console.WriteLine("--vide--");
+                Console.WriteLine("\t--vide--");
             }
         }
 
@@ -192,13 +126,13 @@ namespace Client
         //SUPPRESSION D'UNE RECETTE DE LA SELECTION COURANTE
         private static void delFromCourantSelection()
         {
-            
+
             Console.WriteLine("Nom de la recette à supprimer de la sélection courante?");
             String supprimcourante = Console.ReadLine();
             Console.WriteLine(recetteProxy.deletecourante(supprimcourante));
         }
 
-        
+
 
         static void Main(string[] args)
         {
@@ -215,16 +149,18 @@ namespace Client
             {
                 Console.WriteLine("\n\nQuelle action voulez-vous effectuer ?");
                 Console.WriteLine("1-Liste de l'ensemble des recettes");
-                Console.WriteLine("2-Création d'une recette");
-                Console.WriteLine("3-Liste des recettes pour un ingrédient donné");
-                Console.WriteLine("4-Recette dans la selection courante");
-                Console.WriteLine("5-Suppression d'une recette dans la selection courante");
+                Console.WriteLine("2-Ingredients de chaque recette");
+                Console.WriteLine("3-Création d'une recette");
+                Console.WriteLine("4-Liste des recettes pour un ingrédient donné");
+                Console.WriteLine("5-Recette dans la selection courante");
+                Console.WriteLine("6-Suppression d'une recette dans la selection courante");
+                Console.WriteLine("7-Rechercher une recette et la definir en tant que selection courante");
                 Console.WriteLine("0-Quitter");
 
                 Console.WriteLine("\nVeuillez saisir le numéro de votre choix en appuyer sur entrer");
                 choix = Convert.ToInt32(Console.ReadLine());
 
-                switch(choix)
+                switch (choix)
                 {
                     case 0:
                         Console.WriteLine("Vous quittez le programme, au revoir");
@@ -233,22 +169,57 @@ namespace Client
                         listRecettes();
                         break;
                     case 2:
-                        creerRecette();
+                        detailsListeCourante();
                         break;
                     case 3:
-                        getRecetteForIngr();
+                        creerRecette();
                         break;
                     case 4:
-                        selectionCourante();
+                        getRecetteForIngr();
                         break;
                     case 5:
+                        selectionCourante();
+                        break;
+                    case 6:
                         delFromCourantSelection();
                         break;
+                    case 7:
+                        getRecette();
+                        break;
                 }
-                
+
             }
             Console.WriteLine("Fin du client");
             Console.ReadLine();
+        }
+
+        private static void getRecette()
+        {
+            Console.WriteLine("\nNom de la recette");
+            String nom = Console.ReadLine();
+            Recette recette = recetteProxy.getRecette(nom);
+            if(recette == null)
+            {
+                Console.WriteLine("La recette n'existe pas");
+            }
+            else
+            {
+                Console.WriteLine("Definie en tant que selection courante");
+            }
+        }
+
+        private static void detailsListeCourante()
+        {
+            Console.WriteLine("Details de la liste courante:");
+            foreach (var item in recetteProxy.getInfoCourante())
+            {
+                Console.WriteLine(item.Nom + ":");
+                foreach (var ingredient in item.Listeingredients)
+                {
+                    Console.WriteLine("\t" + ingredient.Nom);
+                }
+
+            }
         }
     }
 }

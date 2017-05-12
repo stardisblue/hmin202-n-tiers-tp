@@ -1,13 +1,21 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "share", "share\share.csproj", "{1FE09E71-8285-4CA0-8576-BF81FA0FC2D5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HebergementService", "HebergementService\HebergementService.csproj", "{4BF88DCD-6517-4F6F-855E-06061986A92B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{01E00D83-70F7-4629-8365-A181ABF43CED}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1FE09E71-8285-4CA0-8576-BF81FA0FC2D5} = {1FE09E71-8285-4CA0-8576-BF81FA0FC2D5}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceRecettes", "ServiceRecettes\ServiceRecettes.csproj", "{03A09584-60FF-4812-A132-E9AA37FABF75}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1FE09E71-8285-4CA0-8576-BF81FA0FC2D5} = {1FE09E71-8285-4CA0-8576-BF81FA0FC2D5}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

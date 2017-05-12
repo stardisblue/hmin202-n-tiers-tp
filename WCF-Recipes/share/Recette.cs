@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Runtime.Serialization;
 
 namespace share
 {
     public class Recette
     {
-        String nom;
+        string nom;
         List<Ingredient> listeingredients = new List<Ingredient>();
 
         [DataMember]
-        public String Nom
+        public string Nom
         {
             get { return nom; }
             set { nom = value; }

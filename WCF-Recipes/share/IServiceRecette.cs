@@ -18,57 +18,51 @@ namespace share
         CompositeType GetDataUsingDataContract(CompositeType composite);
 
         [OperationContract]
-        bool containsIngredient(String nameIngredient);
-
-        [OperationContract]
-        List<Recette> rechercheParNomIngredient(String nom);
-
-        [OperationContract]
-        Recette newRecette(String nom);
-
-        [OperationContract]
-        Ingredient newIngredient(String nom);
-
-        [OperationContract]
         List<Recette> searchRecette(Ingredient ingr);
 
         [OperationContract]
-        String getNomIngre(Ingredient ing);
+        string deletecourante(string nom);
 
         [OperationContract]
-        String getNomRecette(Recette rec);
+        Recette createRecette(string nom);
 
         [OperationContract]
-        String deletecourante(String nom);
+        string saveRecette(Recette recette);
 
         [OperationContract]
-        String addRecette(Recette recette);
+        string addRecette(Recette recette);
 
         [OperationContract]
-        Boolean isEmpty();
+        Recette getRecette(string Nom);
+
+        [OperationContract]
+        Ingredient newIngredient(string nom);
+
+        [OperationContract]
+        string addIngredient(string Recette, string Ingredient);
+
+        [OperationContract]
+        Ingredient getIngredient(string Nom);
+
+        [OperationContract]
+        bool isEmpty();
 
         [OperationContract]
         List<Recette> getInfoCourante();
 
         [OperationContract]
-        void initializebase();
-
-        [OperationContract]
-        List<Recette> listeBase();
-      
+        Dictionary<string, Recette> listeBase();
     }
 
     [ServiceContract(SessionMode = SessionMode.Required)]
     public interface IBase
     {
         [OperationContract]
-        List<Recette> basedelaRecettes();
+        Dictionary<string, Recette> basedelaRecettes();
 
     }
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations
-
-   
 
     [DataContract]
     public class CompositeType
